@@ -12,7 +12,7 @@ import time
 
 def my_logger(message):
     message = f'Logs : {message}'
-    logger.console(message, stream='STDOUT')
+    logger.debug(message)
 
 
 @library

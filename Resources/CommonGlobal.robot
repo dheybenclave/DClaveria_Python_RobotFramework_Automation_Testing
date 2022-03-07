@@ -1,7 +1,11 @@
 *** Settings ***
 Documentation       Common Keywords, Task , Commands and Setup
+Library             OperatingSystem
 Library             SeleniumLibrary
 Library             String
+#Library             RPA.Browser.Selenium
+#Library             Browser
+
 
 #Libraries | Keyword Command
 Library             ../Libraries/common_global.py
@@ -38,10 +42,28 @@ ${DASHBOARD_URL}    ${LOGIN_URL}/app/vr-bank_/
 
 *** Keywords ***
 
+Setup chromedriver
+  my logger   ${EXECDIR}
+
+
 Open Application
     [Arguments]  ${app_url}=${LOGIN_URL}   ${app_browser}=${BROWSER}
 
-    Open browser    ${app_url}   ${app_browser}
+    Set Environment Variable  webdriver.chrome.driver  ${EXECDIR}\\attest\\bin
+
+#    ${chrome_options} =    Evaluate    selenium.webdriver.ChromeOptions()
+#    Call Method    ${chrome_options}    add_argument    --log-level\=3
+#    Call Method    ${chrome_options}    add_argument    --start-maximized
+#    Call Method    ${chrome_options}    add_argument    --window-size\=800,600
+#    Call Method    ${chrome_options}    add_argument    --headless
+#    Call Method    ${chrome_options}    add_argument    --disable-extensions
+#    Create WebDriver    Chrome    chrome_options=${chrome_options}
+
+#    Open browser    ${app_url}   ${app_browser}
+
+    Create Webdriver    Chrome    executable_path=${EXECDIR}\\attest\\bin\\chromedriver.exe
+    Go To   ${app_url}
+
     maximize browser window
     wait until location contains   ${app_url}
     location should contain  ${app_url}

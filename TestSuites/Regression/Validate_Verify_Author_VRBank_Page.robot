@@ -6,7 +6,7 @@ Test Teardown       Close Application
 *** Variables ***
 
 *** Test Cases ***
-Validate and Verify Login Page
+Validate Verify Author VR Bank Page
     [Documentation]  Validate Verify PEGA VR Bank Page
     [Tags]  Regression
 

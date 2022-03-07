@@ -29,7 +29,6 @@ Select Dropdown Value
     ${attr_class_selector} =   Get Element Attribute    ${dropdown_selector}   class
 
     ${is_studio_selector} =    Run Keyword And Return Status    Should Contain    ${attr_class_selector}    Application_name
-    my logger  ${is_studio_selector}_asd
 
     ${selected_dropdown_item}=  set variable     ${None}
 
