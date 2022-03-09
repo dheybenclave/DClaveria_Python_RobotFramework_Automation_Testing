@@ -10,6 +10,7 @@ Library             String
 #Libraries | Keyword Command
 Library             ../Libraries/common_global.py
 
+
 #Page Assertions
 Resource            ../Resources/Assertions/assertions_common.robot
 
@@ -29,6 +30,7 @@ Resource            ../Resources/PageSelectors/StudioPage/APPStudioPage/common_a
 Resource            ../Resources/PageSelectors/StudioPage/DevStudioPage/common_dev_studio_selectors.robot
 #Page : VRBank Page
 Resource            ../Resources/PageSelectors/VrBankPage/common_vrbank_selectors.robot
+Resource            ../Resources/PageSelectors/VrBankPage/create_deceased_customer_dialog.robot
 
 #Test Data
 Resource            ../Resources/TestData/UserCredentials.robot
@@ -76,9 +78,34 @@ Close Application
 
 Validate and Verify Error Message
     [Arguments]    ${selector}     ${err_message}
-    scroll element into view    ${selector}
-    element should be visible   ${selector}
-    element text should be      ${selector}     ${err_message}
+
+     validate verify element error message     ${selector}     ${err_message}
+#    scroll element into view    ${selector}
+#    element should be visible   ${selector}
+#    element text should be      ${selector}     ${err_message}
+
+
+Navigate To
+    [Arguments]     ${nav_selector}
+
+    Sleep   2s
+    ${sub_nav} =  Run Keyword And Return Status    Should Contain    ${nav_selector}    create-case-menu
+
+    IF  "${sub_nav}" == "True"
+    	Set Selenium Timeout	5s
+        click element  ${vrbank_nav_create_case_button}
+        Sleep   2s
+        wait until element is visible  ${nav_selector}
+        element should be enabled   ${nav_selector}
+        click element  ${nav_selector}
+    ELSE IF  "${sub_nav}" == "False"
+    	Set Selenium Timeout	5s
+        element should be visible   ${nav_selector}
+        element should be enabled   ${nav_selector}
+        click element  ${nav_selector}
+    END
+
+
 
 
 

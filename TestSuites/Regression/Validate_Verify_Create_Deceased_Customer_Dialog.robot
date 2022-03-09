@@ -33,13 +33,13 @@ user should see the VR Bank Page
 user verify that the all fields is Visible
     my logger  user login using valid credentials
     Verify Page Elements should be Visible  @{vrbank_nav_field_elements}
-#    validate verify element error message   ${vrbank_nav_search_button}  testing
-    Click Element                           ${vrbank_items_follow_parent_selector}
-    Verify Page Elements should be Visible  @{vrbank_header_field_elements}
-    Verify Page Elements should be Visible  @{vrbank_pulse_field_elements}
-    Verify Page Elements should be Visible  @{vrbank_banner_field_elements}
-    Verify Page Elements should be Visible  @{vrbank_my_worklist_field_elements}
-    Verify Page Elements should be Visible  @{vrbank_items_follow_field_elements}
+    Navigate To   ${vrbank_nav_spaces_button}
+    Navigate To   ${vrbank_nav_create_case_deceased_customer_button}
+    Verify Page Elements should be Visible  @{create_deceased_customer_field_elements}
+
+    Validate and Verify Error Message   ${create_deceased_customer_customerNumber_textbox}  Not a Blank
+
+
 
 
 
